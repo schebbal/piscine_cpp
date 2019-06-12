@@ -1,0 +1,40 @@
+# **************************************************************************** #
+#                                                           LE - /             #
+#                                                               /              #
+#    Makefile                                         .::    .:/ .      .::    #
+#                                                  +:+:+   +:    +:  +:+:+     #
+#    By: schebbal <schebbal@student.le-101.fr>      +:+   +:    +:    +:+      #
+#                                                  #+#   #+    #+    #+#       #
+#    Created: 2019/04/10 13:46:11 by schebbal     #+#   ##    ##    #+#        #
+#    Updated: 2019/04/10 14:02:49 by schebbal    ###    #+. /#+    ###.fr      #
+#                                                          /                   #
+#                                                         /                    #
+# **************************************************************************** #
+
+EXEC	= whatever
+SRCC	= whatever.cpp 
+SRCO 	= $(SRCC:%.cpp=%.o)
+
+CFLAG	= -Wall -Wextra -Werror
+
+.SILENT:
+
+all: $(EXEC)
+
+%.o: %.cpp %.hpp
+
+$(EXEC): $(SRCO)
+		clang++ $(CFLAG) $^ -o $(EXEC)
+		printf '\033[32m[ ✔ ] %s\n\033[0m' "Created whatever"
+
+clean:
+		/bin/rm -rf $(SRCO)
+		printf '\033[31m[ ✔ ] %s\n\033[0m' "Cleaned whatever"
+
+fclean: clean
+		/bin/rm -f $(EXEC)
+		printf '\033[31m[ ✔ ] %s\n\033[0m' "Fcleaned whatever"
+
+re: fclean all
+
+.PHONY: clean fclean re all
